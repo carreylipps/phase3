@@ -7,8 +7,6 @@ const express = require('express');
 const app = express();
 const port = 3000;
 var fs = require("fs");
-const convert = require('js2xml');
-const axios = require('axios');
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
@@ -288,6 +286,8 @@ app.post("/rest/ticket/updateTicket", function(req, res) {
     run().catch(console.dir);
 });
 // Endpoint to get a single ticket as an XML document
+const convert = require('js2xml');
+const axios = require('axios');
 app.get('/rest/xml/ticket/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -309,8 +309,3 @@ app.get('/rest/xml/ticket/:id', async (req, res) => {
   }
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}.`);
-});
