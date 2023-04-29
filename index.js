@@ -286,7 +286,7 @@ app.post("/rest/ticket/updateTicket", function(req, res) {
     run().catch(console.dir);
 });
 // Endpoint to get a single ticket as an XML document
-const convert = require('js2xml').Js2Xml;
+const convert = require('js-xml').Js2Xml;
 const axios = require('axios');
 app.get('/rest/xml/ticket/:id', async (req, res) => {
   try {
