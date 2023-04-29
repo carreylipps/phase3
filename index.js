@@ -7,6 +7,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 var fs = require("fs");
+const convert = require('xml-js');
+const axios = require('axios');
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
@@ -284,4 +286,31 @@ app.post("/rest/ticket/updateTicket", function(req, res) {
         }
     }
     run().catch(console.dir);
+});
+// Endpoint to get a single ticket as an XML document
+app.get('/rest/xml/ticket/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Use axios to make a GET request to the /rest/ticket/:id endpoint to get ticket information as a JSON object
+    const response = await axios.get(`https://mongotest-qpgv.onrender.com/rest/ticket/${id}`);
+    const ticket = response.data;
+
+    // Convert JSON to XML using the xml-js package
+    const options = { compact: true, ignoreComment: true, spaces: 4 };
+    const xml = convert.js2xml(ticket, options);
+
+    // Set the response content type to XML and send the XML document
+    res.set('Content-Type', 'text/xml');
+    res.send(xml);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while processing your request.');
+  }
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}.`);
 });
