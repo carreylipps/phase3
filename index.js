@@ -286,7 +286,7 @@ app.post("/rest/ticket/updateTicket", function(req, res) {
     run().catch(console.dir);
 });
 // Endpoint to get a single ticket as an XML document
-const convert = require('js2xml');
+const convert = require('js2xml').Js2Xml;
 const axios = require('axios');
 app.get('/rest/xml/ticket/:id', async (req, res) => {
   try {
@@ -308,4 +308,25 @@ app.get('/rest/xml/ticket/:id', async (req, res) => {
     res.status(500).send('An error occurred while processing your request.');
   }
 });
+//Endpoint to add a single ticket that was sent as an XML document
+const bodyParser = require('body-parser');
+const convert = require('xml2js').Xml2Js;
+app.use(bodyParser.text({ type: 'text/xml' }));
+app.put('/rest/xml/ticket/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const xml = req.body;
 
+    // Convert the XML document to a JSON object using the xml-js package
+    const options = { compact: true, ignoreComment: true, spaces: 4 };
+    const json = convert.xml2js(xml, options);
+
+    // Use axios to make a PUT request to the existing /rest/ticket/:id endpoint to add the ticket information
+    await axios.put(`https://mongotest-qpgv.onrender.com/rest/ticket/${id}`, json);
+
+    res.sendStatus(204); // Send a success response with no content
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while processing your request.');
+  }
+});
