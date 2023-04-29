@@ -310,7 +310,7 @@ app.get('/rest/xml/ticket/:id', async (req, res) => {
 });
 //Endpoint to add a single ticket that was sent as an XML document
 const bodyParser = require('body-parser');
-const convert = require('xml2js').Xml2Js;
+const convert = require('xml-js').Xml2Js;
 app.use(bodyParser.text({ type: 'text/xml' }));
 app.put('/rest/xml/ticket/:id', async (req, res) => {
   try {
