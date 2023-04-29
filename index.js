@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 var fs = require("fs");
-const convert = require('xml-js');
+const convert = require('js2xml');
 const axios = require('axios');
 
 app.listen(port);
