@@ -5,7 +5,7 @@ const uri = "mongodb+srv://carrey:beauxbella@clmdb.xd8c4zo.mongodb.net/?retryWri
 
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 3006;
 var fs = require("fs");
 const { js2xml, xml2js } = require('js-xml');
 const axios = require('axios');
