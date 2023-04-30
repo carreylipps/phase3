@@ -1,23 +1,25 @@
 {
-  "name": "415phase3",
-  "version": "1.0.0",
-  "description": "CMPS415 Project Phase 3",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/carreylipps/phase3"
-  },
-  "author": "Carrey Lipps",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "mongodb": "^5.3.0",
-    "body-parser": "^1.20.2"
-  },
-  "engines": {
-    "node": ">=14"
-  }
+    "name": "415phase3",
+    "version": "1.0.0",
+    "description": "CMPS415 Project Phase 3",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/carreylipps/phase3"
+    },
+    "author": "Carrey Lipps",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^1.4.0",
+        "body-parser": "^1.20.2",
+        "express": "^4.18.2",
+        "js-xml": "^2.0.0",
+        "mongodb": "^5.3.0"
+    },
+    "engines": {
+        "node": ">=14"
+    }
 }
