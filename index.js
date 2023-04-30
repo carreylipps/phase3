@@ -7,6 +7,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 var fs = require("fs");
+const { js2xml, xml2js } = require('js-xml');
+const axios = require('axios');
+const bodyParser = require('body-parser');
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
@@ -286,19 +289,20 @@ app.post("/rest/ticket/updateTicket", function(req, res) {
     run().catch(console.dir);
 });
 // Endpoint to get a single ticket as an XML document
-const convert = require('js-xml').Js2Xml;
-const axios = require('axios');
+app.use(bodyParser.text({ type: 'text/xml' }));
+
+// Endpoint to get a single ticket as an XML document
 app.get('/rest/xml/ticket/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Use axios to make a GET request to the /rest/ticket/:id endpoint to get ticket information as a JSON object
     const response = await axios.get(`https://mongotest-qpgv.onrender.com/rest/ticket/${id}`);
     const ticket = response.data;
 
-    // Convert JSON to XML using the xml-js package
+    // Convert JSON to XML using the js-xml package
     const options = { compact: true, ignoreComment: true, spaces: 4 };
-    const xml = convert.js2xml(ticket, options);
+    const xml = js2xml(ticket, options);
 
     // Set the response content type to XML and send the XML document
     res.set('Content-Type', 'text/xml');
@@ -308,18 +312,16 @@ app.get('/rest/xml/ticket/:id', async (req, res) => {
     res.status(500).send('An error occurred while processing your request.');
   }
 });
-//Endpoint to add a single ticket that was sent as an XML document
-const bodyParser = require('body-parser');
 
-app.use(bodyParser.text({ type: 'text/xml' }));
+// Endpoint to add a single ticket that was sent as an XML document
 app.put('/rest/xml/ticket/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const xml = req.body;
 
-    // Convert the XML document to a JSON object using the xml-js package
+    // Convert the XML document to a JSON object using the js-xml package
     const options = { compact: true, ignoreComment: true, spaces: 4 };
-    const json = convert.xml2js(xml, options);
+    const json = xml2js(xml, options);
 
     // Use axios to make a PUT request to the existing /rest/ticket/:id endpoint to add the ticket information
     await axios.put(`https://mongotest-qpgv.onrender.com/rest/ticket/${id}`, json);
@@ -329,4 +331,8 @@ app.put('/rest/xml/ticket/:id', async (req, res) => {
     console.error(error);
     res.status(500).send('An error occurred while processing your request.');
   }
+});
+
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
 });
