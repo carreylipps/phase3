@@ -296,7 +296,7 @@ app.get('/rest/xml/ticket/:id', async (req, res) => {
    const { id } = req.params;
 
     // Use axios to make a GET request to the /rest/ticket/:id endpoint to get ticket information as a JSON object
-    const response = await axios.get(`https://mongotest-qpgv.onrender.com/rest/ticket/${id}`);
+    const response = await axios.get(`https://phase3-2zaa.onrender.com/rest/ticket/${id}`);
     const ticket = response.data;
 
     // Convert JSON to XML using the js-xml package
@@ -323,7 +323,7 @@ app.put('/rest/xml/ticket/:id', async (req, res) => {
     const json = xml2js(xml, options);
 
     // Use axios to make a PUT request to the existing /rest/ticket/:id endpoint to add the ticket information
-    await axios.put(`https://mongotest-qpgv.onrender.com/rest/ticket/${id}`, json);
+    await axios.put(`https://phase3-2zaa.onrender.com/rest/ticket/${id}`, json);
 
     res.sendStatus(204); // Send a success response with no content
   } catch (error) {
