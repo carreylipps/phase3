@@ -10,6 +10,7 @@ var fs = require("fs");
 const  xml2js  = require('xml2js');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const { parseStringPromise } = require('xml2js');
 
 app.listen(port);
 console.log('Server started at http://localhost:' + port);
