@@ -7,8 +7,7 @@ const express = require('express');
 const app = express();
 const port = process.env.port || 3005;
 var fs = require("fs");
-const json2xml  = require('js-xml').parseString;
-const xml2json = require('xml-js').parseString;
+const {json2xml, xml2json}  = require('js-xml').parseString;
 const axios = require('axios');
 const bodyParser = require('body-parser');
 
