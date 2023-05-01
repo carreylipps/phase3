@@ -332,6 +332,3 @@ app.put('/rest/xml/ticket/:id', async (req, res) => {
   }
 });
 
-app.listen(3005, () => {
-  console.log('Server started on port 3005');
-});
