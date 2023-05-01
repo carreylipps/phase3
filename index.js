@@ -322,6 +322,8 @@ app.put('/rest/xml/ticket/:id', async (req, res) => {
     // Convert the XML document to a JSON object using the js-xml package
     const options = { compact: true, ignoreComment: true, spaces: 4 };
     const json = xml2js(xml, options);
+      
+    console.log(json);
 
     // Use axios to make a PUT request to the existing /rest/ticket/:id endpoint to add the ticket information
     await axios.put(`https://phase3-2zaa.onrender.com/rest/ticket/${id}`, json);
