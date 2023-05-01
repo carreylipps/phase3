@@ -5,7 +5,7 @@ const uri = "mongodb+srv://carrey:beauxbella@clmdb.xd8c4zo.mongodb.net/?retryWri
 
 const express = require('express');
 const app = express();
-const port = 3006;
+const port = 3005;
 var fs = require("fs");
 const { js2xml, xml2js } = require('js-xml');
 const axios = require('axios');
@@ -333,6 +333,6 @@ app.put('/rest/xml/ticket/:id', async (req, res) => {
   }
 });
 
-app.listen(3006, () => {
-  console.log('Server started on port 3006');
+app.listen(3005, () => {
+  console.log('Server started on port 3005');
 });
