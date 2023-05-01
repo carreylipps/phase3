@@ -291,7 +291,6 @@ app.post("/rest/ticket/updateTicket", function(req, res) {
 // Endpoint to get a single ticket as an XML document
 app.use(bodyParser.text({ type: 'text/xml' }));
 
-// Endpoint to get a single ticket as an XML document
 app.get('/rest/xml/ticket/:id', async (req, res) => {
   try {
    const { id } = req.params;
