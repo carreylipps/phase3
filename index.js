@@ -7,7 +7,7 @@ const express = require('express');
 const app = express();
 const port = process.env.port || 3005;
 var fs = require("fs");
-const {json2xml, xml2json}  = require('js-xml').parseString;
+const {js2xml, xml2js}  = require('js-xml');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 
@@ -301,7 +301,7 @@ app.get('/rest/xml/ticket/:id', async (req, res) => {
 
     // Convert JSON to XML using the js-xml package
     const options = { compact: true, ignoreComment: true, spaces: 4 };
-    const xml = json2xml(ticket, options);
+    const xml = js2xml(ticket, options);
 
     // Set the response content type to XML and send the XML document
     res.set('Content-Type', 'text/xml');
@@ -320,7 +320,7 @@ app.put('/rest/xml/ticket/:id', async (req, res) => {
 
     // Convert the XML document to a JSON object using the js-xml package
     const options = { compact: true, ignoreComment: true, spaces: 4 };
-    const json = xml2json(xml, options);
+    const json = xml2js(xml, options);
       
     console.log(json);
 
